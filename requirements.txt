@@ -73,10 +73,9 @@ pyrsistent @ file:///C:/ci/pyrsistent_1636093225342/work
 PySocks @ file:///C:/ci/pysocks_1605307512533/work
 python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
 pytz @ file:///C:/b/abs_22fofvpn1x/croot/pytz_1671698059864/work
-pywinpty
 pywin32==305.1
 PyYAML==6.0
-pyzmq @ file:///C:/b/abs_655zk4a3s8/croot/pyzmq_1686601465034/work
+pyzmq==22.1.0
 qdldl==0.1.7.post0
 requests @ file:///C:/b/abs_316c2inijk/croot/requests_1690400295842/work
 rich @ file:///C:/b/abs_09j2g5qnu8/croot/rich_1684282185530/work
