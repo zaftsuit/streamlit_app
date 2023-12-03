@@ -50,7 +50,7 @@ ipython-genutils
 ipywidgets 
 jedi 
 Jinja2 
-joblib==1.2.0
+joblib
 json5 
 jsonschema 
 jupyter 
