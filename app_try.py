@@ -91,7 +91,7 @@ ICULOS=st.number_input(label='ICULOS')
 ICULOS_HLOS=st.number_input(label='ICULOS/HLOS')
 
 
-# In[8]:
+# In[11]:
 
 
 #采集数据
@@ -118,29 +118,36 @@ if st.button("Predict"):
     X = X.replace(['None','Anterior','Posterior','Combined'], [0,1,2,3])
     X = X.replace(['None','Enteral','Parenteral'], [0,1,2])
     X = X.replace(['Yes','No'], [1, 0])
+    #结果
+    def survival_time(model,patient):
+        chf_funcs=model.predict_cumulative_hazard_function(patient)
+        for fn in chf_funcs:#
+            if fn(va_times[-1])<1:#在最后的预测时间内死亡全部累计概率不到0.6
+                time_value=999
+                print('This patient had no predicted death for 240 months')
+            else:
+                for time in va_times:
+                    if fn(time)>1:
+                        time_value=time#发生结局的最短时间
+                        break
+                print('This patient was predicted to die at{}months'.format(time))          
+    prediction = GBRT.predict(X)[0]
+    patient=X[0]
+    survival_time(GBRT,patient)
+    # Output prediction
+    st.header('outcome prediction')
+    st.text(f"mortality risk:{prediction}")
+    st.text(f"mortality risk:{survival_time}")
 
 
 # In[ ]:
 
 
-#结果
-def survival_time(model,patient):
-    chf_funcs=model.predict_cumulative_hazard_function(patient)
-    for fn in chf_funcs:#
-        if fn(va_times[-1])<1:#在最后的预测时间内死亡全部累计概率不到0.6
-            time_value=999
-            print('This patient had no predicted death for 240 months')
-        else:
-            for time in va_times:
-                if fn(time)>1:
-                    time_value=time#发生结局的最短时间
-                    break
-            print('This patient was predicted to die at{}months'.format(time))
-prediction = GBRT.predict(X)[0]
-patient=X[0]
-survival_time(GBRT,patient)
-# Output prediction
-st.header('outcome prediction')
-st.text(f"mortality risk:{prediction}")
-st.text(f"mortality risk:{survival_time}")
+
+
+
+# In[ ]:
+
+
+
 
