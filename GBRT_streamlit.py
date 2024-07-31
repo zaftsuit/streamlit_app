@@ -118,13 +118,13 @@ if st.button("Predict"):
         chf_funcs=model.predict_cumulative_hazard_function(patient)
         Time=()
         for fn in chf_funcs:#
-            if fn(va_times[-1])<1:#在最后的预测时间内死亡全部累计概率不到0.6
+            if fn(va_times[-1])<0.5:#在最后的预测时间内死亡全部累计概率不到0.6
                 time_value=999
                 Time=('This patient had no predicted death for 60 months')
                 return Time
             else:
                 for time in va_times:
-                    if fn(time)>1:
+                    if fn(time)>=0.5:
                         time_value=time#发生结局的最短时间
                         break
                 Time=('The prognosis survival time of the patients was expected to be {} months'.format(time)) 
