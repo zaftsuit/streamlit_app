@@ -62,7 +62,10 @@ Complications=st.radio(label='Complications',options=['Non-complications','pneum
 if st.button("Predict"):
     # Unpickle classifier
     RSF = joblib.load("RSF1.pkl")
-    X_train = pd.read_csv('X_train.csv', low_memory=False)
+    data=[]
+    X_train= pd.DataFrame(data=data,columns = ['NLI', 'Sex','Energy of damage','Critical care','Time of injury',
+                              'Cervical fracture','AISA grade','Nourishment','CCI','Thoracic and abdominal organs damage',
+                               'Transfusion','Age','Complications','Surgical timing','ISS'])
     explainer = shap.Explainer(RSF1.predict,X_train)
     # Store inputs into dataframe
     X = pd.DataFrame([[NLI,Sex,Energy_of_damage,Critical_care,Time_injury,
