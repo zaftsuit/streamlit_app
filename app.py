@@ -62,7 +62,8 @@ Complications=st.radio(label='Complications',options=['Non-complications','pneum
 if st.button("Predict"):
     # Unpickle classifier
     RSF = joblib.load("RSF1.pkl")
-    data=[[0,0,1,0,5,0,0,0,0,0,1,21,0,2,16],[1,0,1,1,3,2,0,2,0,0,1,30,0,2,25],[1,0,1,1,2,2,1,1,2,0,2,58,0,1,30],[1,1,1,1,7,1,1,2,0,1,2,25,2,2,35],
+    data=[
+    [0,0,1,0,5,0,0,0,0,0,1,21,0,2,16],[1,0,1,1,3,2,0,2,0,0,1,30,0,2,25],[1,0,1,1,2,2,1,1,2,0,2,58,0,1,30],[1,1,1,1,7,1,1,2,0,1,2,25,2,2,35],
           [1,1,1,0,2,2,1,0,2,0,1,57,0,2,33],[1,0,1,1,1,1,0,2,2,0,1,50,0,2,41],[0,0,1,1,1,2,0,2,1,1,1,46,2,1,26],[1,1,1,1,1,0,1,2,1,0,1,48,2,2,26],
           [1,0,1,0,1,2,0,0,0,0,1,35,0,2,25],[0,1,1,1,5,2,1,2,2,1,2,57,1,2,30],[0,0,1,1,1,2,0,2,1,0,1,49,2,1,25],[0,0,1,1,1,2,1,2,2,0,1,57,0,1,25],
           [1,1,0,1,2,0,1,1,2,0,1,59,0,1,17],[0,0,1,0,3,2,1,1,2,0,1,51,0,2,30],[1,0,1,0,1,2,0,0,4,0,2,56,0,1,35],[1,0,1,0,1,2,0,0,2,0,2,58,0,2,33],
@@ -210,24 +211,13 @@ if st.button("Predict"):
     #final
     patient = X[X.index==0]
     rg=risk_groups(RSF,patient)
-
-    explainer = shap.Explainer(RSF1.predict,X_train)
-    p1=plt.figure()
-    shap_values1=explainer(X)
-    shap.plots.waterfall(shap_values1[0])
-    plt.savefig("shap_waterfall.png", bbox_inches='tight', dpi=1200)
   
-    p2=plt.figure()
-    shap_values = explainer(patient)
-    shap.plots.force(shap_values,matplotlib=True,show=False,contribution_threshold=0.01)
-    plt.savefig("shap_force.png", bbox_inches='tight', dpi=1200)
+    
     # Output prediction
     st.header('outcome prediction')
     st.text(f"mortality risk:\n{rg}")
     st.text(f"Predicting Outcomes:\n{ST}")
-    st.text(f"Risk indicators plot：\n")
-    st.image("shap_waterfall.png")
-    st.image("shap_force.png")
+    
 
 
 # In[ ]:
