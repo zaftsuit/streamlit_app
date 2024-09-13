@@ -155,7 +155,7 @@ if st.button("Predict"):
     X_train= pd.DataFrame(data=data,columns = ['NLI', 'Sex','Energy of damage','Ventilator support','Time of injury',
                               'Cervical fracture','AISA grade','Nourishment','CCI','Thoracic and abdominal organs damage',
                                'Transfusion','Age','Complications','Surgical timing','ISS'])
-    
+    explainer = shap.Explainer(RSF.predict,X_train)
     # Store inputs into dataframe
     X = pd.DataFrame([[NLI,Sex,Energy_of_damage,ventilator_support,Time_injury,
                       Cervical_fracture,AISA_grade,Nourishment,CCI,Thoracic_abdominal_organs_damage,
@@ -212,12 +212,22 @@ if st.button("Predict"):
     patient = X[X.index==0]
     rg=risk_groups(RSF,patient)
   
-    
+    p1=plt.figure()
+    shap_values1=explainer(X)
+    shap.plots.waterfall(shap_values1[0])
+    plt.savefig("shap_waterfall.png", bbox_inches='tight', dpi=1200)
+  
+    p2=plt.figure()
+    shap_values = explainer(patient)
+    shap.plots.force(shap_values,matplotlib=True,show=False,contribution_threshold=0.01)
+    plt.savefig("shap_force.png", bbox_inches='tight', dpi=1200)
     # Output prediction
     st.header('outcome prediction')
     st.text(f"mortality risk:\n{rg}")
     st.text(f"Predicting Outcomes:\n{ST}")
-    
+    st.text(f"Risk indicators plot：\n")
+    st.image("shap_waterfall.png")
+    st.image("shap_force.png")
 
 
 # In[ ]:
