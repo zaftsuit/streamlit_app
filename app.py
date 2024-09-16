@@ -157,23 +157,23 @@ if st.button("Predict"):
                                'Transfusion','Age','Complications','Surgical timing','ISS'])
     explainer = shap.Explainer(RSF.predict,X_train)
     # Store inputs into dataframe
-    X = pd.DataFrame([[NLI,Sex,Energy_of_damage,ventilator_support,Time_injury,
+    X1 = pd.DataFrame([[NLI,Sex,Energy_of_damage,ventilator_support,Time_injury,
                       Cervical_fracture,AISA_grade,Nourishment,CCI,Thoracic_abdominal_organs_damage,
                       Transfusion,Age,Complications,Surgical_timing,ISS]], 
                     columns = ['NLI', 'Sex','Energy of damage','Ventilator support','Time of injury',
                               'Cervical fracture','AISA grade','Nourishment','CCI','Thoracic and abdominal organs damage',
                                'Transfusion','Age','Complications','Surgical timing','ISS'])
-    X = X.replace(["C1-C4", "C5-C8"], [1, 0])
-    X = X.replace(["Yes", "No"], [1, 0])
-    X = X.replace(['Non-damage','Single','multiple'], [0,1,2])
-    X = X.replace(['Non-fractures','Upper(C1-2)','Lower(C3-7)'], [0,1,2])
-    X = X.replace(['Non-surgery','Early(＜3d)','Delay(≥3d)'], [0,1,2])
-    X = X.replace(['Normal','Enteral','Parenteral'], [0,1,2])
-    X = X.replace(['No-surgery','Transfusion','No-transfusion'],[0,1,2])
-    X = X.replace(['Male','Female'], [0, 1])
-    X = X.replace(['High','Low'], [1, 0])
-    X = X.replace(['A','B'], [1, 0])
-    X = X.replace(['Non-complications','pneumonia','Failure of organs'], [0,1,2])
+    X1 = X1.replace(["C1-C4", "C5-C8"], [1, 0])
+    X1 = X1.replace(["Yes", "No"], [1, 0])
+    X1 = X1.replace(['Non-damage','Single','multiple'], [0,1,2])
+    X1 = X1.replace(['Non-fractures','Upper(C1-2)','Lower(C3-7)'], [0,1,2])
+    X1 = X1.replace(['Non-surgery','Early(＜3d)','Delay(≥3d)'], [0,1,2])
+    X1 = X1.replace(['Normal','Enteral','Parenteral'], [0,1,2])
+    X1 = X1.replace(['No-surgery','Transfusion','No-transfusion'],[0,1,2])
+    X1 = X1.replace(['Male','Female'], [0, 1])
+    X1 = X1.replace(['High','Low'], [1, 0])
+    X1 = X1.replace(['A','B'], [1, 0])
+    X1 = X1.replace(['Non-complications','pneumonia','Failure of organs'], [0,1,2])
     #survival time
     def survival_time(model,patient):
         va_times=np.arange(0,60)
@@ -191,8 +191,8 @@ if st.button("Predict"):
                         break
                 Time=('According to our model, the survival time of the patient\nis expected to be {} months'.format(time)) 
                 return Time
-    prediction = RSF.predict(X)
-    patient = X[X.index==0]
+    prediction = RSF.predict(X1)[0]
+    patient = X1[X1.index==0]
     ST = survival_time(RSF,patient)
   
     #risk-group
@@ -210,7 +210,7 @@ if st.button("Predict"):
                 group=('High-risk group')
                 return group 
     #final
-    patient = X[X.index==0]
+    patient = X1[X1.index==0]
     rg=risk_groups(RSF,patient)
   
     p1=plt.figure()
