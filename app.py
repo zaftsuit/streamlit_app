@@ -191,7 +191,7 @@ if st.button("Predict"):
                         break
                 Time=('According to our model, the survival time of the patient\nis expected to be {} months'.format(time)) 
                 return Time
-    prediction = RSF.predict(X)[0]
+    prediction = RSF.predict(X)
     patient = X[X.index==0]
     ST = survival_time(RSF,patient)
   
