@@ -200,10 +200,10 @@ if st.button("Predict"):
         y_risk=model.predict(patient)
         group=()
         for fn in y_risk:#
-            if fn<33.8:
+            if fn<29.2:
                 group=('Low-risk group')
                 return group
-            if fn>=33.8:
+            if fn>=29.2:
                 group=('High-risk group')
                 return group 
     #final
