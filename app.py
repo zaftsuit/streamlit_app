@@ -163,8 +163,8 @@ if st.button("Predict"):
                     columns = ['NLI', 'Sex','Energy of damage','Ventilator support','Time of injury',
                               'Cervical fracture','AISA grade','Nourishment','CCI','Thoracic and abdominal organs damage',
                                'Transfusion','Age','Complications','Surgical timing','ISS'])
-    X= X.replace(["C1-C4", "C5-C8"], [1, 0])
-    X= X.replace(["Yes", "No"], [1, 0])
+    X= X.replace(['C1-C4', 'C5-C8'], [1,0])
+    X= X.replace(['Yes', 'No'], [1,0])
     X= X.replace(['Non-damage','Single','multiple'], [0,1,2])
     X= X.replace(['Non-fractures','Upper(C1-2)','Lower(C3-7)'], [0,1,2])
     X= X.replace(['Non-surgery','Early(＜3d)','Delay(≥3d)'], [0,1,2])
