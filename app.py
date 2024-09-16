@@ -194,6 +194,7 @@ if st.button("Predict"):
     prediction = RSF.predict(X)[0]
     patient = X[X.index==0]
     ST = survival_time(RSF,patient)
+  
     #risk-group
     def risk_groups(model,patient):
         y_risk=model.predict(patient)
