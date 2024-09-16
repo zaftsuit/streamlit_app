@@ -210,7 +210,7 @@ if st.button("Predict"):
                 group=('High-risk group')
                 return group 
     #final
-    patient = X1[X1.index==0]
+    patient = X[X.index==0]
     rg=risk_groups(RSF,patient)
   
     p1=plt.figure()
