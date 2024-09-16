@@ -37,7 +37,7 @@ NLI=st.radio(label='Neurological level of impairment',options=['C1-C4','C5-C8'])
 Time_injury=st.slider(label='Time of injury',min_value=1, max_value=10)
 #8 Surgery timing
 Surgical_timing=st.radio(label='Surgical Timing',
-                   options=['Non-surgery','Early','Delay'])
+                   options=['Non-surgery','Early(＜3d)','Delay(≥3d)'])
 #9.Transfusion
 Transfusion=st.radio(label='Transfusion',options=['No-surgery','Transfusion','No-transfusion'])
 #10.Critical care
