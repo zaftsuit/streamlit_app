@@ -66,7 +66,7 @@ kiwisolver==1.4.4
 lifelines==0.27.4
 llvmlite==0.39.0
 lxml
-markdown-it-py==2.2.0
+markdown-it-py==4.2.0
 MarkupSafe 
 matplotlib==3.5.3
 matplotlib-inline 
@@ -106,7 +106,7 @@ pycox==0.2.3
 pycparser 
 pycryptodomex==3.16.0
 pydeck==0.8.0
-Pygments==2.14.0
+Pygments==2.20.0
 Pympler==1.0.1
 pyOpenSSL 
 pyparsing==3.0.9
@@ -124,7 +124,7 @@ qdldl==0.1.5.post3
 qtconsole 
 QtPy 
 requests 
-rich==13.3.1
+rich>=13.3.1
 scikit-learn==1.0
 scikit-survival==0.17.2
 scipy==1.7.3
@@ -138,7 +138,7 @@ smmap==5.0.0
 sniffio 
 soupsieve 
 statsmodels==0.13.5
-streamlit==1.19.0
+streamlit>=1.19.0,<2.0.0
 tableone==0.7.10
 tabulate==0.9.0
 terminado 
